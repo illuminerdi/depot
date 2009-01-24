@@ -1,11 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  title: MyString
-  description: MyText
-  image_url: MyString
+  title: Foo
+  description: A quick book for testing stuff!
+  image_url: http://www.google.com/foo.gif
+  price: 2995
 
 two:
-  title: MyString
-  description: MyText
-  image_url: MyString
+  title: Bar
+  description: A quick book for testing stuff, kinda like foo, but better!
+  image_url: http://www.google.com/bar.gif
+  price: 1200
