@@ -4,6 +4,7 @@
     <%= image_tag(product.image_url) %> 
     <h3><%=h product.title %></h3> 
     <%= product.description %> 
-    <span class="price">$<%= sprintf("%01.2f", product.price / 100) %></span> 
+    <span class="price"><%= number_to_currency(product.price/100) %></span> 
+		<%= button_to "Add to Cart"%>
   </div> 
 <% end %>

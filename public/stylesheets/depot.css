@@ -112,7 +112,7 @@ h1 {
 /* An entry in the store catalog */
 
 #store  .entry {
-  overflow: auto;
+  overflow: visible;
   margin-top: 1em;
   border-bottom: 1px dotted #77d;
 }
