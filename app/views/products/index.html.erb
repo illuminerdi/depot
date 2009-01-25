@@ -1,5 +1,5 @@
 <div id="product-list">
-	<h1>Listing products</h1> 
+	<h1>Listing products</h1>
 	<table> 
 		<% for product in @products %> 
 			<tr class="<%= cycle('list-line-odd', 'list-line-even') %>"> 
@@ -11,6 +11,7 @@
 					  <dt><%=h product.title %></dt> 
 					  <dd><%=h truncate(product.description.gsub(/<.*?>/,''), 80) %></dd> 
 				  </dl> 
+					<span class="price">$<%= sprintf("%01.2f", product.price / 100) %></span>
 				</td> 
 				<td class="list-actions"> 
 					<%= link_to 'Show', product %><br/> 

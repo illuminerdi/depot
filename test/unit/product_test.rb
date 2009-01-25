@@ -31,6 +31,13 @@ class ProductTest < ActiveSupport::TestCase
     assert ! product.valid?
     assert product.errors.on(:price)
   end
+  
+  test "that product title is at least minimum length" do
+    product = products(:one)
+    product.title = 'foo'
+    assert ! product.valid?
+    assert product.errors.on(:title)
+  end
 
   test "that the price must be at least one cent" do
     product = products(:one)
