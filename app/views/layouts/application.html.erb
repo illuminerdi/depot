@@ -4,14 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Depot Bookstore: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold', 'depot' %>
+  <title>Pragprog Books Online Store</title>
+  <%= stylesheet_link_tag "depot", :media => "all" %>
 </head>
-<body>
-
-<p style="color: green"><%= flash[:notice] %></p>
-
-<%= yield  %>
-
+<body id="store">
+  <div id="banner">
+  	<%= image_tag("logo.png") %>
+		<%= @page_title || "Illuminerdi Bookshelf" %>
+  </div>
+	<div id="columns">
+		<div id="side">
+			<%= link_to 'Home', '/' %><br/>
+		</div>
+	  <div id="main">
+	    <%= yield :layout %>
+	  </div>
+	</div>
 </body>
 </html>

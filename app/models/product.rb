@@ -1,7 +1,8 @@
 class Product < ActiveRecord::Base
   validates_presence_of :title, :description, :image_url
   validates_uniqueness_of :title
-  validates_numericality_of :price
+  validates_numericality_of :price,
+                      :message => 'must be an amount of pennies'
   validate :price_must_be_at_least_a_cent
   validates_format_of :image_url, 
                       :with => %r{\.(gif|jpg|png)$}i, 
@@ -9,7 +10,7 @@ class Product < ActiveRecord::Base
                       'or PNG image.(gif|jpg|png)'
   validates_length_of :title,
                       :minimum => 10,
-                      :message => "seems too short"
+                      :message => "seems too short (must be at least 10 characters long)"
 
   def self.find_products_for_sale
     find(:all, :order => "title")

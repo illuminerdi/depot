@@ -1,5 +1,16 @@
 /* Global styles */
 
+/* START:notice */
+#notice {
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+/* END:notice */
+
+
 /* Styles for products/index */
 
 #product-list table {
@@ -48,6 +59,56 @@
   background:   #f8b0f8;
 }
 
+/* START:mainlayout */
+/* Styles for main page */
+
+#banner {
+  background: #999;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid;
+  font: small-caps 40px/40px "Times New Roman", serif;
+  color: #990000;
+  text-align: center;
+}
+
+#banner img {
+  float: left;
+	padding-left: 7px;
+}
+
+#columns {
+  background: #c6c6c6;
+}
+
+#main {
+  margin-left: 13em;
+  padding-top: 4ex;
+  padding-left: 2em;
+  background: white;
+}
+
+#side {
+  float: left;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  width: 12em;
+  background: #c6c6c6;
+}
+
+#side a {
+  color: #000;
+  font-size: small;
+}
+
+h1 {
+  font:  150% sans-serif;
+  color: #226;
+  border-bottom: 3px dotted #77d;
+}
+/* END:mainlayout */
+
 /* An entry in the store catalog */
 
 #store  .entry {
@@ -91,6 +152,80 @@
   font-weight: bold;
   margin-right: 2em;
 }
+
+/* START:inline */
+#store .entry form, #store .entry form div {
+  display: inline;
+}
+/* END:inline */
+
+/* START:cartmain */
+/* Styles for the cart in the main page */
+
+.cart-title {
+  font: 120% bold;
+}
+
+.item-price, .total-line {
+  text-align: right;
+}
+
+.total-line .total-cell {
+  font-weight: bold;
+  border-top: 1px solid #595;
+}
+/* END:cartmain */
+
+/* START:cartside */
+/* Styles for the cart in the sidebar */
+
+#cart, #cart table {
+  font-size: smaller;
+  color:     white;
+}
+
+#cart table {
+  border-top:    1px dotted #595;
+  border-bottom: 1px dotted #595;
+  margin-bottom: 10px;
+}
+/* END:cartside */
+
+/* START:form */
+/* Styles for order form */
+
+.depot-form fieldset {
+  background: #efe;
+}
+
+.depot-form legend {
+  color: #dfd;
+  background: #141;
+  font-family: sans-serif;
+  padding: 0.2em 1em;
+}
+
+.depot-form label {
+  width: 5em;
+  float: left;
+  text-align: right;
+  padding-top: 0.2em;
+  margin-right: 0.1em;
+  display: block;
+}
+
+.depot-form select, .depot-form textarea, .depot-form input {
+  margin-left: 0.5em;
+}
+
+.depot-form .submit {
+  margin-left: 4em;
+}
+
+.depot-form div {
+  margin: 0.5em 0;
+}
+/* END:form */
 
 /* The error box */
 
