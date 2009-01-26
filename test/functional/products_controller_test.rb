@@ -41,7 +41,14 @@ class ProductsControllerTest < ActionController::TestCase
   end
   
   test "does not redirect on error for new product" do
-    flunk "write me"
+    post :create, :product => {
+      :title        => 'awesome product',
+      :description  => 'awesome product description',
+      :image_url    => 'http://example.com/foo.gif',
+      :price        => 'abc' # bad price!
+    }
+    
+    assert_response :success # 200 is okay, we're coming back to the same page, no redirect, because we broke the model
   end
   
   test "should show errors on bad new product" do
@@ -80,11 +87,27 @@ class ProductsControllerTest < ActionController::TestCase
   end
   
   test "should not redirect on error for updated product" do
-    flunk "write me"
+    put :update, :id => products(:one).id, :product => {
+      :title => 'foo'
+    }
+    
+    assert_response :success # 200 is okay, we're coming back to the same page, no redirect, because we broke the model
   end
   
   test "should show errors on bad product update" do
-    flunk "write me"
+    put :update, :id => products(:one).id, :product => {
+      :title => 'foo'
+    }
+    
+    product = assigns(:product)
+    assert ! product.valid?
+    assert product.errors.size == 1
+    error_msg = product.errors.full_messages.first
+    # search the body for our error message
+    assert @response.body.include?(error_msg)
+    assert_select "div.fieldWithErrors" do |elements|
+      assert elements.size == 2
+    end
   end
 
   test "should destroy product" do

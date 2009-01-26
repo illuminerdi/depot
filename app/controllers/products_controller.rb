@@ -35,11 +35,13 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+    @product.price = sprintf("%01.2f", @product.price / 100.0)
   end
 
   # POST /products
   # POST /products.xml
   def create
+    params[:product][:price] = params[:product][:price].to_f * 100 if params[:product][:price].match(/\./)
     @product = Product.new(params[:product])
 
     respond_to do |format|
@@ -58,9 +60,10 @@ class ProductsController < ApplicationController
   # PUT /products/1.xml
   def update
     @product = Product.find(params[:id])
-    params[:product][:price] = params[:product][:price].to_f * 100 if params[:product][:price].match(/\./)
-    raise params[:product].inspect
-
+    unless params[:product][:price].nil?
+      params[:product][:price] = params[:product][:price].to_f * 100 if params[:product][:price].match(/\./)
+    end
+    
     respond_to do |format|
       if @product.update_attributes(params[:product])
         flash[:notice] = 'Product was successfully updated.'
