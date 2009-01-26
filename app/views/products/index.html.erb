@@ -11,7 +11,7 @@
 					  <dt><%=h product.title %></dt> 
 					  <dd><%=h truncate(product.description.gsub(/<.*?>/,''), 80) %></dd> 
 				  </dl> 
-					<span class="price">$<%= sprintf("%01.2f", product.price / 100) %></span>
+					<span class="price">$<%= sprintf("%01.2f", product.price / 100.0) %></span>
 				</td> 
 				<td class="list-actions"> 
 					<%= link_to 'Show', product %><br/> 

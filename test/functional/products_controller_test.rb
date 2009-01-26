@@ -39,6 +39,14 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_redirected_to product_path(assigns(:product))
   end
+  
+  test "does not redirect on error for new product" do
+    flunk "write me"
+  end
+  
+  test "should show errors on bad new product" do
+    flunk "write me"
+  end
 
   test "should show product" do
     get :show, :id => products(:one).id
@@ -69,6 +77,14 @@ class ProductsControllerTest < ActionController::TestCase
     assert_redirected_to product_path(assigns(:product))
 
     assert_equal 'mega awesome title', Product.find(products(:one).id).title
+  end
+  
+  test "should not redirect on error for updated product" do
+    flunk "write me"
+  end
+  
+  test "should show errors on bad product update" do
+    flunk "write me"
   end
 
   test "should destroy product" do

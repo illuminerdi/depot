@@ -58,6 +58,8 @@ class ProductsController < ApplicationController
   # PUT /products/1.xml
   def update
     @product = Product.find(params[:id])
+    params[:product][:price] = params[:product][:price].to_f * 100 if params[:product][:price].match(/\./)
+    raise params[:product].inspect
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
