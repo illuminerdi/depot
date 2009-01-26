@@ -51,8 +51,38 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success # 200 is okay, we're coming back to the same page, no redirect, because we broke the model
   end
   
+  test "should convert decimal price to integer amount of pennies for new product" do
+    post :create, :product => {
+      :title        => 'some other awesome product',
+      :description  => 'some other awesome product description',
+      :image_url    => '/images/svn.png',
+      :price        => '20.95'
+    }
+    
+    product = assigns(:product)
+    assert product.valid?
+    assert product.price == 2095
+  end
+  
   test "should show errors on bad new product" do
-    flunk "write me"
+    post :create, :product => {
+      :title        => 'some other awesome product',
+      :description  => '', # bad, expecting to contain something
+      :image_url    => '/images/svn.xls', # bad, not an image file
+      :price        => '20.95'
+    }
+    product = assigns(:product)
+    assert ! product.valid?, :message => ": Product is valid (and shouldn't be)"
+    assert product.errors.size == 2, :message => ": Wrong number of error messages from model"
+    error_msgs = product.errors.full_messages
+    # search the body for our error message
+    error_msgs.each do |error_msg|
+      assert @response.body.include?(error_msg), 
+        :message => ": Error message not found in response body"
+    end
+    assert_select "div.fieldWithErrors" do |elements|
+      assert elements.size == 4, :message => ": Wrong number of fields showing errors on page"
+    end
   end
 
   test "should show product" do
@@ -100,14 +130,25 @@ class ProductsControllerTest < ActionController::TestCase
     }
     
     product = assigns(:product)
-    assert ! product.valid?
-    assert product.errors.size == 1
+    assert ! product.valid?, :message => ": Product is valid (and shouldn't be)"
+    assert product.errors.size == 1, :message => ": Wrong number of error messages from model"
     error_msg = product.errors.full_messages.first
     # search the body for our error message
-    assert @response.body.include?(error_msg)
+    assert @response.body.include?(error_msg), 
+        :message => ": Error message not found in response body"
     assert_select "div.fieldWithErrors" do |elements|
-      assert elements.size == 2
+      assert elements.size == 2, :message => ": Wrong number of fields showing errors on page"
     end
+  end
+  
+  test "should convert decimal price to integer amount of pennies for product update" do
+    put :update, :id => products(:one).id, :product => {
+      :price => '124.50'
+    }
+    
+    product = assigns(:product)
+    assert product.valid?
+    assert product.price = 12450
   end
 
   test "should destroy product" do
