@@ -61,19 +61,19 @@ class ProductsControllerTest < ActionController::TestCase
     
     product = assigns(:product)
     assert product.valid?
-    assert product.price == 2095
+    assert product.price == 2095, :message => ": 2095 expected, #{product.price} returned instead"
   end
   
   test "should show errors on bad new product" do
     post :create, :product => {
       :title        => 'some other awesome product',
       :description  => '', # bad, expecting to contain something
-      :image_url    => '/images/svn.xls', # bad, not an image file
-      :price        => '20.95'
+      :image_url    => '/images/svn.png',
+      :price        => 'abc' # not a number.
     }
     product = assigns(:product)
     assert ! product.valid?, :message => ": Product is valid (and shouldn't be)"
-    assert product.errors.size == 2, :message => ": Wrong number of error messages from model"
+    assert product.errors.size == 3, :message => ": Wrong number of error messages from model"
     error_msgs = product.errors.full_messages
     # search the body for our error message
     error_msgs.each do |error_msg|
@@ -143,12 +143,12 @@ class ProductsControllerTest < ActionController::TestCase
   
   test "should convert decimal price to integer amount of pennies for product update" do
     put :update, :id => products(:one).id, :product => {
-      :price => '124.50'
+      :price => '124.2'
     }
     
     product = assigns(:product)
     assert product.valid?
-    assert product.price = 12450
+    assert product.price = 12420
   end
 
   test "should destroy product" do

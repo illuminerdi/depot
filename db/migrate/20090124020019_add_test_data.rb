@@ -15,7 +15,7 @@ class AddTestData < ActiveRecord::Migration
             exciting---and difficult---stuff, like writing quality code.
           </p>},
       :image_url =>   '/images/auto.jpg',    
-      :price => 2995)
+      :price => '29.95')
 
       
     Product.create(:title => 'Pragmatic Version Control',
@@ -29,7 +29,7 @@ class AddTestData < ActiveRecord::Migration
            up experiencing time-consuming problems.
         </p>},
       :image_url => '/images/svn.jpg',
-      :price => 2850)
+      :price => '28.50')
 
 
     Product.create(:title => 'Pragmatic Unit Testing (C#)',
@@ -48,7 +48,7 @@ class AddTestData < ActiveRecord::Migration
             expect them.
           </p>},
       :image_url => '/images/utc.jpg',
-      :price => 2775)
+      :price => '27.75')
   end
 
   def self.down

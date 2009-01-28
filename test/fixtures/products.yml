@@ -4,10 +4,10 @@ one:
   title: Foo is the first book
   description: A quick book for testing stuff!
   image_url: http://www.google.com/foo.gif
-  price: 2995
+  price: 29.95
 
 two:
   title: Bar is the second
   description: A quick book for testing stuff, kinda like foo, but better!
   image_url: http://www.google.com/bar.gif
-  price: 1200
+  price: 12.00

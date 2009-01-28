@@ -3,7 +3,7 @@ require 'test_helper'
 class ProductTest < ActiveSupport::TestCase
   test "product has price" do
     product = products(:one)
-    product.price = 1000
+    product.price = 10.00
     product.save!
   end
 
@@ -24,6 +24,18 @@ class ProductTest < ActiveSupport::TestCase
     assert ! product.valid?
     assert product.errors.on(:image_url)
   end
+  
+  test "that price gets converted from dollars to cents" do
+    product = products(:one)
+    product.price = 0.23
+    assert product.price == 23
+    
+    product.price = 12
+    assert product.price == 1200
+    
+    product.price = "10.2"
+    assert product.price == 1020
+  end
 
   test "that price must be a number" do
     product = products(:one)
@@ -42,7 +54,7 @@ class ProductTest < ActiveSupport::TestCase
   test "that the price must be at least one cent" do
     product = products(:one)
 
-    product.price = 0.01
+    product.price = 0
     assert !product.valid?
     assert product.errors.on(:price)
 

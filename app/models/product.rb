@@ -16,6 +16,13 @@ class Product < ActiveRecord::Base
     find(:all, :order => "title")
   end
   
+  def price=(new_price)
+    if new_price.instance_of?(Fixnum) or new_price.instance_of?(Float) or new_price == new_price.to_f.to_s
+      new_price = (new_price.to_f * 100.0).round
+    end
+    write_attribute(:price, new_price)
+  end
+  
   protected
   
   def price_must_be_at_least_a_cent

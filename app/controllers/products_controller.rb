@@ -41,7 +41,6 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.xml
   def create
-    params[:product][:price] = params[:product][:price].to_f * 100 if params[:product][:price].match(/\./)
     @product = Product.new(params[:product])
 
     respond_to do |format|
@@ -60,9 +59,6 @@ class ProductsController < ApplicationController
   # PUT /products/1.xml
   def update
     @product = Product.find(params[:id])
-    unless params[:product][:price].nil?
-      params[:product][:price] = params[:product][:price].to_f * 100 if params[:product][:price].match(/\./)
-    end
     
     respond_to do |format|
       if @product.update_attributes(params[:product])
