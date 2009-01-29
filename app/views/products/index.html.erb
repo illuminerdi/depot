@@ -9,7 +9,7 @@
 				<td class="list-description"> 
 				  <dl> 
 					  <dt><%=h product.title %></dt> 
-					  <dd><%=h truncate(product.description.gsub(/<.*?>/,''), 80) %></dd> 
+					  <dd><%=h truncate(product.description.gsub(/<.*?>/,''), :length => 80) %></dd> 
 				  </dl> 
 					<span class="price">$<%= sprintf("%01.2f", product.price / 100.0) %></span>
 				</td> 
