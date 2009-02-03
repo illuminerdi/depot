@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class StoreControllerTest < ActionController::TestCase
+  test "session contains cart" do
+    get :index
+    assert session[:cart]
+  end
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -18,5 +23,12 @@ class StoreControllerTest < ActionController::TestCase
       }
       assert_tag :tag => 'a'
     end
+  end
+  
+  test "add_to_cart adds a product to the cart" do
+    post :add_to_cart, :id => products(:one).id
+    assert_response :success
+    assert cart = assigns(:cart)
+    assert_equal 1, cart.items.length
   end
 end

@@ -87,4 +87,10 @@ class ProductTest < ActiveSupport::TestCase
       product.title
     }, sale_products
   end
+  
+  test "price_in_dollars" do
+    product = products(:one)
+    
+    assert_equal product.price, product.price_in_dollars * 100
+  end
 end

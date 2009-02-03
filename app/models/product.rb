@@ -17,10 +17,14 @@ class Product < ActiveRecord::Base
   end
   
   def price=(new_price)
-    if new_price.instance_of?(Fixnum) or new_price.instance_of?(Float) or new_price == new_price.to_f.to_s
+    if new_price.instance_of?(Fixnum) or new_price.instance_of?(Float) or new_price.to_s == new_price.to_f.to_s
       new_price = (new_price.to_f * 100.0).round
     end
     write_attribute(:price, new_price)
+  end
+  
+  def price_in_dollars
+    self.price.to_f / 100
   end
   
   protected
