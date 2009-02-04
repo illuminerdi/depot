@@ -37,7 +37,7 @@ class StoreControllerTest < ActionController::TestCase
     post :add_to_cart, :id => products(:one).id
     cart = assigns(:cart)
     assert_equal 2, cart.items[0].quantity
-    assert_match /#{cart.items[0].quantity} &times; #{products(:one).title}/, @response.body
+    assert_match /#{cart.items[0].quantity}&times;<\/td>\n\s+<td>#{products(:one).title}/, @response.body
   end
   
   test "add_to_cart protects against bad product ids being passed through url" do

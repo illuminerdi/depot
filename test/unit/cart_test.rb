@@ -39,6 +39,6 @@ class CartTest < ActiveSupport::TestCase
     cart.add_product products(:one)
     cart.add_product products(:two)
     cart.add_product products(:two)
-    assert_equal 4940, cart.total_price
+    assert_equal 49.4, cart.total_price
   end
 end

@@ -141,6 +141,18 @@ class ProductsControllerTest < ActionController::TestCase
     end
   end
   
+  test "should give proper error for bad price entry" do
+    put :update, :id => products(:one).id, :product => {:price => 'abcs'}
+    product = assigns(:product)
+    assert ! product.valid?
+    assert product.errors.size == 2
+    error_msg = product.errors.full_messages.first
+    assert @response.body.include?(error_msg)
+    assert_select "div.fieldWithErrors" do |elements|
+      assert elements.size == 2
+    end
+  end
+  
   test "should convert decimal price to integer amount of pennies for product update" do
     put :update, :id => products(:one).id, :product => {
       :price => '124.2'
