@@ -27,7 +27,7 @@ class StoreControllerTest < ActionController::TestCase
   
   test "add_to_cart adds a product to the cart" do
     post :add_to_cart, :id => products(:one).id
-    assert_redirected_to :action => :index
+    assert_response :success
     assert cart = assigns(:cart)
     assert_equal 1, cart.items.length
   end
@@ -44,11 +44,6 @@ class StoreControllerTest < ActionController::TestCase
     post :add_to_cart, :id => "tree"
     assert_redirected_to :controller => :store, :action => :index
     assert_equal "Invalid Product", flash[:notice]
-  end
-  
-  test "add_to_cart works with ajaxy goodness" do
-    xhr :post, :add_to_cart, :id => products(:one), :format => 'js'
-    assert_response :success
   end
   
   test "empty_cart empties cart and redirects to index with status message" do
