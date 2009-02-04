@@ -15,9 +15,9 @@
   </div>
 	<div id="columns">
 		<div id="side">
-			<div id="cart">
+		  <% hidden_div_if(@cart.items.empty?, :id => "cart") do %>
 				<%= render(:partial => "cart", :object => @cart) %>
-		  </div>
+		  <% end %>
 			<%= link_to 'Home', '/' %><br/>
 		</div>
 	  <div id="main">
