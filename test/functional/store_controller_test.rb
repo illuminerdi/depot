@@ -82,4 +82,36 @@ class StoreControllerTest < ActionController::TestCase
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'order[email]'}
     assert_tag :tag => 'select', :attributes => {:name => 'order[pay_type]'}
   end
+  
+  test "save_order empties cart and redirects to index with status message" do
+    post :add_to_cart, :id => products(:one)
+    post :save_order, :order => {
+      :name => "Jay Graham",
+      :address => "123 Silly St Federal Way, WA 98023",
+      :email => "something.dumb@microsoft.com",
+      :pay_type => "check"
+    }
+    assert_nil assigns(:cart)
+    assert_redirected_to :controller => :store, :action => :index
+  end
+  
+  test "save_order redirects to checkout when unable to save due to empty name" do
+    post :save_order, :order => {
+      :name => "", #=> bad!
+      :address => "123 Silly St Federal Way, WA 98023",
+      :email => "something.dumb@microsoft.com",
+      :pay_type => "check"
+    }
+    assert_reponse :success
+    order = assigns(:order)
+    assert ! order.valid?
+    assert_equal 1, order.errors.size
+    error_msgs = order.errors.full_messages
+    error_msgs.each do |error_msg|
+      assert @response.body.include?(error_msg)
+    end
+    assert_select "div.fieldWithErrors" do |elements|
+      assert_equal 2, elements.size
+    end
+  end
 end
