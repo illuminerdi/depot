@@ -84,14 +84,16 @@ class StoreControllerTest < ActionController::TestCase
   end
   
   test "save_order empties cart and redirects to index with status message" do
-    post :add_to_cart, :id => products(:one)
+    @request.session[:cart] = Cart.new
+    @request.session[:cart].add_product(products(:one))
+
     post :save_order, :order => {
       :name => "Jay Graham",
       :address => "123 Silly St Federal Way, WA 98023",
       :email => "something.dumb@microsoft.com",
       :pay_type => "check"
     }
-    assert_nil assigns(:cart)
+    assert_nil session[:cart]
     assert_redirected_to :controller => :store, :action => :index
   end
   
