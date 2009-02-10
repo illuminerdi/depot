@@ -195,12 +195,12 @@ h1 {
 /* Styles for order form */
 
 .depot-form fieldset {
-  background: #efe;
+  background: #c6c6c6;
 }
 
 .depot-form legend {
-  color: #dfd;
-  background: #141;
+  color: #fff;
+  background: #900;
   font-family: sans-serif;
   padding: 0.2em 1em;
 }
