@@ -5,3 +5,15 @@
 #
 # two:
 #   column: value
+
+one:
+  name: Joshua Clingenpeel
+  address: 123 Happy Road, Seattle WA 98101
+  email: something.generic@email.com
+  pay_type: VISA
+
+two:
+  name: Simply Martinez
+  address: 555 Anonymous Blvd, Anytown, USA 12345
+  email: s.martinez@funny.org
+  pay_type: Check

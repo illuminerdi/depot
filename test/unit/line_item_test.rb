@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class LineItemTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  
+  test "line_item has product and order" do
+    order = orders(:one)
+    product = products(:one)
+    line_item = line_items(:one)
+    # where to go from here?
   end
 end

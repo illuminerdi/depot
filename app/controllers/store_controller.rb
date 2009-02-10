@@ -1,6 +1,5 @@
 class StoreController < ApplicationController
   def index
-    find_cart
     @products = Product.find_products_for_sale
     @cart = find_cart
   end
@@ -24,6 +23,10 @@ class StoreController < ApplicationController
   def empty_cart
     session[:cart] = nil
     redirect_to_index
+  end
+  
+  def checkout
+    @cart = find_cart
   end
 
   private

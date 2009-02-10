@@ -5,3 +5,8 @@
 #
 # two:
 #   column: value
+one:
+  product_id: 1
+  order_id: 1
+  quantity: 1
+  total_price: 2900
