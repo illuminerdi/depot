@@ -54,6 +54,11 @@ class StoreControllerTest < ActionController::TestCase
     assert_equal "Invalid Product", flash[:notice]
   end
   
+  test "add_to_cart for no javascript degrades gracefully" do
+    post :add_to_cart, :id => products(:one)
+    assert_redirected_to :action => :index
+  end
+  
   test "empty_cart empties cart and redirects to index with status message" do
     post :empty_cart
     assert_nil assigns(:cart)
