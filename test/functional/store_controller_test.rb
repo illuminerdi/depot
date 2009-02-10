@@ -63,5 +63,7 @@ class StoreControllerTest < ActionController::TestCase
     post :empty_cart
     assert_nil assigns(:cart)
     assert_redirected_to :controller => :store, :action => :index
+    
+    #assert_match /<div id=\"notice\"/, @response.body
   end
 end
