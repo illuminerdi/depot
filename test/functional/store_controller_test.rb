@@ -66,4 +66,20 @@ class StoreControllerTest < ActionController::TestCase
     
     #assert_match /<div id=\"notice\"/, @response.body
   end
+  
+  test "checkout does not allow empty cart" do
+    get :index
+    post :checkout
+    assert_redirected_to :controller => :store, :action => :index
+  end
+  
+  test "checkout form has all required fields" do
+    post :add_to_cart, :id => products(:one)
+    post :checkout
+    assert_response :success
+    assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'order[name]'}
+    assert_tag :tag => 'textarea', :attributes => {:name => 'order[address]'}
+    assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'order[email]'}
+    assert_tag :tag => 'select', :attributes => {:name => 'order[pay_type]'}
+  end
 end
