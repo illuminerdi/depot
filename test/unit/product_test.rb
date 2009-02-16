@@ -100,5 +100,6 @@ class ProductTest < ActiveSupport::TestCase
     line_item = line_items(:one)
     order = orders(:one)
     assert_equal order, product.line_items.first.order
+    assert_equal order, product.orders.first
   end
 end
