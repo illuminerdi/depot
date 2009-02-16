@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  hashed_password: MyString
-  salt: MyString
+  name: joshua
+  hashed_password: <%= User.encrypted_password('boo', 'radley') %>
+  salt: radley
 
 two:
-  name: MyString
-  hashed_password: MyString
-  salt: MyString
+  name: jisun
+  hashed_password: <%= User.encrypted_password('pancake', 'face') %>
+  salt: face

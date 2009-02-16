@@ -5,6 +5,7 @@ class ProductTest < ActiveSupport::TestCase
     product = products(:one)
     product.price = 10.00
     product.save!
+    assert product.valid?
   end
 
   test "product validates presence of title" do
