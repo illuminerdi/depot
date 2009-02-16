@@ -104,7 +104,7 @@ class StoreControllerTest < ActionController::TestCase
       :email => "something.dumb@microsoft.com",
       :pay_type => "check"
     }
-    assert_reponse :success
+    assert_response :success
     order = assigns(:order)
     assert ! order.valid?
     assert_equal 1, order.errors.size
