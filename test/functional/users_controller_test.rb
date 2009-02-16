@@ -71,5 +71,18 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to users_path
+    assert_equal @response.flash[:notice], "User #{users(:one).name} deleted"
+  end
+  
+  test "should not destroy the last user" do
+    users = User.find(:all)
+    assert_raise(RuntimeError) do
+      loop do
+        users.first.destroy
+        users.shift
+      end
+    end
+
+   assert_equal 1, users.length
   end
 end

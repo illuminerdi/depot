@@ -37,6 +37,12 @@ class User < ActiveRecord::Base
     self.hashed_password = User.encrypted_password(self.password, self.salt)
   end
   
+  def after_destroy
+    if User.count.zero?
+      raise "Can't delete last user"
+    end
+  end
+  
   private
   
   def password_not_blank

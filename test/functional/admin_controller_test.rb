@@ -26,4 +26,12 @@ class AdminControllerTest < ActionController::TestCase
     
     assert_redirected_to users_path
   end
+  
+  test "user gets logged out" do
+    @request.session[:user_id] = users(:one).id
+    get :logout
+    assert_redirected_to :controller => :admin, :action => :login
+    assert ! @response.session[:user_id]
+    assert_equal @response.flash[:notice], "Logged out" 
+  end
 end
