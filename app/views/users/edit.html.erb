@@ -8,12 +8,12 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :hashed_password %><br />
-    <%= f.text_field :hashed_password %>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
   </p>
   <p>
-    <%= f.label :salt %><br />
-    <%= f.text_field :salt %>
+    <%= f.label :password_confirmation, "Confirm Password" %><br />
+    <%= f.password_field :password_confirmation %>
   </p>
   <p>
     <%= f.submit "Update" %>
