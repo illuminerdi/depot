@@ -6,3 +6,5 @@ doc/app
 .project
 .loadpath
 .tmp_*
+coverage/
+vendor/
