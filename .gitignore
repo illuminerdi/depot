@@ -5,3 +5,4 @@ doc/api
 doc/app
 .project
 .loadpath
+.tmp_*
