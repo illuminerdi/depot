@@ -4,3 +4,8 @@
 en:
   layout:
     title: "Pragmatic Bookshelf"
+    side:
+      home: "Home"
+      questions: "Questions"
+      news: "News"
+      contact: "Contact"
