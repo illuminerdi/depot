@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  
+  def setup
+    @request.session[:user_id] = users(:one).id
+  end
+  
   test "should get index" do
     get :index
     assert_response :success

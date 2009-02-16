@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class ProductsControllerTest < ActionController::TestCase
+  
+  def setup
+    @request.session[:user_id] = users(:one).id
+  end
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -8,6 +13,13 @@ class ProductsControllerTest < ActionController::TestCase
     assert_tag :tag => 'span', :attributes => {
       :class => 'price'
     }
+  end
+  
+  test "unauthorized entry" do
+    @request.session[:user_id] = nil
+    get :index
+    assert_redirected_to :controller => :admin, :action => :login
+    assert_equal @response.flash[:notice], "Please log in"
   end
 
   test "should get new" do
