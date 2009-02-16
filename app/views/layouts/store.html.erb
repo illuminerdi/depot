@@ -11,7 +11,7 @@
 <body id="store">
   <div id="banner">
     <%= image_tag("logo.png") %>
-    <%= @page_title || "Illuminerdi Bookshelf" %>
+    <%= @page_title || I18n.t('layout.title') %>
   </div>
   <div id="columns">
     <div id="side">
@@ -20,7 +20,10 @@
 	        <%= render(:partial => "cart", :object => @cart) %>
 	      <% end -%>
 		  <% end %>
-      <%= link_to 'Home', '/' %><br/>
+      <%= link_to I18n.t('layout.side.home'), '/' %><br/>
+			<%= link_to I18n.t('layout.side.questions'), '/questions' %><br/>
+			<%= link_to I18n.t('layout.side.news'), '/news' %><br/>
+			<%= link_to I18n.t('layout.side.contact'), '/contact' %><br/>
 			
 			<% if session[:user_id] %> 
 				<br /> 
