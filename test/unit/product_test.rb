@@ -93,4 +93,11 @@ class ProductTest < ActiveSupport::TestCase
     
     assert_equal product.price, product.price_in_dollars * 100
   end
+  
+  test "product is included in an order" do
+    product = products(:one)
+    line_item = line_items(:one)
+    order = orders(:one)
+    assert_equal order, product.line_items.first.order
+  end
 end

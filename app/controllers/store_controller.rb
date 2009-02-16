@@ -22,7 +22,7 @@ class StoreController < ApplicationController
   
   def empty_cart
     session[:cart] = nil
-    redirect_to_index
+    redirect_to_index("Your cart is now empty")
   end
   
   def checkout

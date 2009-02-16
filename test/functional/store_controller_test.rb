@@ -63,18 +63,18 @@ class StoreControllerTest < ActionController::TestCase
     post :empty_cart
     assert_nil assigns(:cart)
     assert_redirected_to :controller => :store, :action => :index
-    
-    #assert_match /<div id=\"notice\"/, @response.body
+    assert flash[:notice] == "Your cart is now empty"
   end
   
   test "checkout does not allow empty cart" do
-    get :index
+    @request.session[:cart] = Cart.new
     post :checkout
     assert_redirected_to :controller => :store, :action => :index
   end
   
   test "checkout form has all required fields" do
-    post :add_to_cart, :id => products(:one)
+    @request.session[:cart] = Cart.new
+    @request.session[:cart].add_product products(:one)
     post :checkout
     assert_response :success
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'order[name]'}
@@ -97,7 +97,7 @@ class StoreControllerTest < ActionController::TestCase
     assert_redirected_to :controller => :store, :action => :index
   end
   
-  test "save_order redirects to checkout when unable to save due to empty name" do
+  test "save_order redirects to checkout when unable to save due to missing info" do
     post :save_order, :order => {
       :name => "", #=> bad!
       :address => "123 Silly St Federal Way, WA 98023",

@@ -8,13 +8,6 @@ class OrderTest < ActiveSupport::TestCase
     assert order.save!
   end
   
-  test "unknown pay type throws an error" do
-    order = orders(:one)
-    order.pay_type = "monopoly money"
-    assert ! order.valid?
-    assert order.errors.on(:pay_type)
-  end
-  
   test "order validates presence of name" do
     order = orders(:one)
     order.name = ""
@@ -34,5 +27,39 @@ class OrderTest < ActiveSupport::TestCase
     order.email = ""
     assert ! order.valid?
     assert order.errors.on(:email)
+  end
+  
+  test "order validates presence of pay type" do
+    order = orders(:two)
+    order.pay_type = ""
+    assert ! order.valid?
+    assert order.errors.on(:pay_type)
+  end
+  
+  test "unknown pay type throws an error" do
+    order = orders(:one)
+    order.pay_type = "monopoly money"
+    assert ! order.valid?
+    assert order.errors.on(:pay_type)
+  end
+  
+  test "add a line item" do
+    order = Order.new(
+      :name => "jgc",
+      :address => "asdfasdf",
+      :email => "asdf@asdf.com",
+      :pay_type => "cc"
+    )
+    cart = Cart.new
+    cart.add_product(products(:one))
+    order.add_line_items_from_cart(cart)
+    assert_equal 1, order.line_items.size
+  end
+  
+  test "order has at least one product in it" do
+    order = orders(:one)
+    line_item = line_items(:one)
+    product = products(:one)
+    assert_equal order, product.line_items.first.order
   end
 end
