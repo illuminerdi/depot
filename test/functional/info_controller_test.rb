@@ -3,7 +3,7 @@ require 'test_helper'
 class InfoControllerTest < ActionController::TestCase
   
   test "who_bought works for xml info" do
-    get :who_bought, :id => products(:one).id
+    get :who_bought, :id => products(:one).id, :format => "xml"
     product = assigns(:product)
     orders = assigns(:orders)
     
