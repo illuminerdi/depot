@@ -25,4 +25,18 @@ class InfoControllerTest < ActionController::TestCase
     assert_equal product.orders.first.pay_type, response["product"]["orders"].first["pay_type"]
   end
 
+  test "who_bought with unknown product for xml gives helpful error" do
+    get :who_bought, :id => -1
+    
+    assert_response :success
+    assert_match /<message>Couldn't find Product with ID=-1<\/message>/, @response.body
+  end
+  
+  test "who_bought with unknown product for JSON gives helpful error" do
+    get :who_bought, :id => -1, :format => "json"
+    
+    assert_response :success
+    response = ActiveSupport::JSON.decode(@response.body)
+    assert_equal "Couldn't find Product with ID=-1", response["message"]
+  end
 end
