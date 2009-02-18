@@ -39,4 +39,12 @@ class InfoControllerTest < ActionController::TestCase
     response = ActiveSupport::JSON.decode(@response.body)
     assert_equal "Couldn't find Product with ID=-1", response["message"]
   end
+  
+  test "who_bought handles a product that has no orders" do
+    LineItem.update(line_items(:one).id, :product_id => products(:two).id)
+    get :who_bought, :id => products(:one)
+    
+    assert_response :success
+    assert_match /<orders.+\/>/, @response.body
+  end
 end
