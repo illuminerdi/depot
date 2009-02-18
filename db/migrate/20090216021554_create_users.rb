@@ -7,6 +7,8 @@ class CreateUsers < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    User.create(:name => "test", :password => "foo", :password_confirmation => "foo") if RAILS_ENV != 'production'
   end
 
   def self.down
