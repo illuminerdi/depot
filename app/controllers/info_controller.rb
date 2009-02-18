@@ -8,4 +8,10 @@ class InfoController < ApplicationController
     end
   end
 
+  private
+  
+  def authorize
+    
+  end
+
 end
