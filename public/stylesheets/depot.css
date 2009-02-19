@@ -268,3 +268,10 @@ h1 {
   font-size: 12px;
   list-style: square;
 }
+
+/* I18n stylin' */
+
+.locale { 
+	float:right; 
+  padding-top: 0.2em 
+} 

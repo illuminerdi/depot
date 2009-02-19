@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'yaml'
 
 class StoreControllerTest < ActionController::TestCase
   test "session contains cart" do
@@ -115,5 +116,32 @@ class StoreControllerTest < ActionController::TestCase
     assert_select "div.fieldWithErrors" do |elements|
       assert_equal 2, elements.size
     end
+  end
+  
+  test "i18n stores in the session a supported locale" do
+    get :index, :locale => "es"
+    assert_response :success
+    assert_equal "es", @response.session[:locale]
+  end
+  
+  test "i18n fails when an unsupported locale is requested" do
+    get :index, :locale => "goofy"
+    assert_equal "en", @response.session[:locale]
+    assert_response :success
+    assert_equal "goofy translation not available", @response.flash[:notice]
+    assert_match /goofy translation not available/, @response.body
+  end
+  
+  test "i18n displays the requested locale output" do
+    get :index, :locale => "es"
+    assert_response :success
+    
+    expected = YAML.load_file( "#{LOCALES_DIRECTORY}es.yml" )["es"]
+    
+    assert_match expected["layout"]["side"]["home"], @response.body
+    assert_match expected["layout"]["side"]["questions"], @response.body
+    assert_match expected["layout"]["side"]["news"], @response.body
+    assert_match expected["layout"]["side"]["contact"], @response.body
+    assert_match expected["layout"]["title"], @response.body
   end
 end
